@@ -1,4 +1,6 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const { encryptPassword } = require('../lib/encryptPassword');
 const { registerValidation } = require('../validations/validation');
 
 exports.register = async (req, res) => {
@@ -17,12 +19,11 @@ exports.register = async (req, res) => {
     const isEmailExists = await User.findOne({email: email})
     
     if(isEmailExists) return res.status(400).json({error: true, message: `El Email ${email} ya ha sido registrado`})
-
     
     const user = new User({
         name,
         email,
-        password
+        password: await encryptPassword(password)
     })
 
     try {
