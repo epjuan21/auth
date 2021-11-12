@@ -31,7 +31,9 @@ app.use(express.urlencoded({extended: false}));
 
 // Routes
 const authRoutes = require('./routes/auth');
+const adminRoute = require('./routes/rutaProtegida');
 app.use('/api/v1/user', authRoutes);
+app.use('/api/v1/admin', adminRoute);
 
 // Server
 app.listen(port, () => {

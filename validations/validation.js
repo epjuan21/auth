@@ -17,7 +17,6 @@ const loginValidation = (data) => {
     })
 
     return schemaRegister.validate(data);
-    
 }
 
 module.exports = { registerValidation, loginValidation  }
