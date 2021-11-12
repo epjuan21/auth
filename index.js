@@ -28,7 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // Routes
-
+const authRoutes = require('./auth/auth');
+app.use('/api/v1/user', authRoutes);
 
 // Server
 app.listen(port, () => {
