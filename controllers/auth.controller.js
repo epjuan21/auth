@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { encryptPassword, comparePassword } = require('../lib/cryptoUtils');
 const { registerValidation, loginValidation } = require('../validations/validation');
 
@@ -54,12 +54,17 @@ exports.login = async(req, res) => {
     
         if(!validPassword) return res.status(400).json({ error: 'contraseña incorrecta' })
 
-        res.status(200).json({
+        const token = jwt.sign({
+            name: user.name,
+            id: user._id
+        }, process.env.JWT_SECRET)
+
+        res.header('auth-token', token).json({
             error: null,
-            message: 'Bienvenido'
+            data: {token}
         })
+
     } catch (error) {
         res.status(400).json(error)
     }
-
 }
