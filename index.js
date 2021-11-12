@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // Routes
-const authRoutes = require('./auth/auth');
+const authRoutes = require('./routes/auth');
 app.use('/api/v1/user', authRoutes);
 
 // Server
