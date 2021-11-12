@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const connectDB = require('./db/database');
 const cors = require('cors');
 require('dotenv').config()
 
@@ -21,6 +21,8 @@ const options = {
 }
 
 // Database
+const url = process.env.DB_STRING;
+connectDB(url)
 
 // Middlewares
 app.use(cors(options));
